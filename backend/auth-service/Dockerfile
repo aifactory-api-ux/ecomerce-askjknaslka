@@ -13,4 +13,4 @@ RUN npm run build && npm prune --omit=dev
 
 EXPOSE 23002
 
-CMD ["node", "dist/index.js"]
+CMD ["node", "dist/src/index.js"]
