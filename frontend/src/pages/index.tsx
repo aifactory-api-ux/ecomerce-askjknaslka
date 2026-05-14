@@ -5,7 +5,7 @@ import Layout from '../components/Layout';
 import ProductList from '../components/ProductList';
 import { useProducts } from '../hooks/useProducts';
 import { useCartActions } from '../hooks/useCart';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../context/AuthContext';
 import { tokens } from '../styles/tokens';
 
 function HomeContent() {
