@@ -2,7 +2,7 @@ FROM node:20.11.1-slim
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY order-service/package*.json ./
 RUN npm install
 
 COPY shared ./shared
