@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import { AuthProvider } from './context/AuthContext';
-import { CartProvider } from './context/CartContext';
-import Layout from './components/Layout';
-import ProductList from './components/ProductList';
-import { useProducts } from './hooks/useProducts';
-import { useCartActions } from './hooks/useCart';
-import { useAuth } from './hooks/useAuth';
-import { tokens } from './styles/tokens';
+import { AuthProvider } from '../context/AuthContext';
+import { CartProvider } from '../context/CartContext';
+import Layout from '../components/Layout';
+import ProductList from '../components/ProductList';
+import { useProducts } from '../hooks/useProducts';
+import { useCartActions } from '../hooks/useCart';
+import { useAuth } from '../hooks/useAuth';
+import { tokens } from '../styles/tokens';
 
 function HomeContent() {
   const { products, loading, error } = useProducts();
