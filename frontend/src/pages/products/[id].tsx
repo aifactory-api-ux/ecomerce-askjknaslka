@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import { Product } from '../types';
+import { Product } from '../../types';
 
 interface ProductPageProps {
   product: Product;
@@ -17,6 +17,9 @@ export default function ProductPage({ product }: ProductPageProps) {
 }
 
 export const getServerSideProps: GetServerSideProps<ProductPageProps> = async ({ params }) => {
+  if (!params || !params.id) {
+    return { notFound: true };
+  }
   const { id } = params;
 
   try {
