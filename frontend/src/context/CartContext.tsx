@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 import { Cart } from '../types';
-import { getCart, addToCart as apiAddToCart, updateCartItem, removeFromCart as apiRemoveFromCart } from '../utils/api';
+import { getCart, addToCart as apiAddToCart, updateCartItem as apiUpdateCartItem, removeFromCart as apiRemoveFromCart } from '../utils/api';
 import { useAuth } from './AuthContext';
 
 interface CartContextType {
@@ -59,7 +59,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setError(null);
       const token = localStorage.getItem('token');
       if (!token) throw new Error('Not authenticated');
-      const updatedCart = await updateCartItem(token, productId, quantity) as Cart;
+      const updatedCart = await apiUpdateCartItem(token, productId, quantity) as Cart;
       setCart(updatedCart);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to update item');
