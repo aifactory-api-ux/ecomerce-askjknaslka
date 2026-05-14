@@ -46,8 +46,8 @@ services:
 
   api-service:
     build:
-      context: ./backend/api-service
-      dockerfile: Dockerfile
+      context: ./backend
+      dockerfile: api-service/Dockerfile
     container_name: ecommerce-api-service
     environment:
       NODE_ENV: production
@@ -77,8 +77,8 @@ services:
 
   auth-service:
     build:
-      context: ./backend/auth-service
-      dockerfile: Dockerfile
+      context: ./backend
+      dockerfile: auth-service/Dockerfile
     container_name: ecommerce-auth-service
     environment:
       NODE_ENV: production
@@ -109,8 +109,8 @@ services:
 
   order-service:
     build:
-      context: ./backend/order-service
-      dockerfile: Dockerfile
+      context: ./backend
+      dockerfile: order-service/Dockerfile
     container_name: ecommerce-order-service
     environment:
       NODE_ENV: production

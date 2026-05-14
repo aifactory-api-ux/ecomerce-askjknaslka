@@ -6,8 +6,8 @@ COPY package*.json ./
 RUN npm install
 
 COPY shared ./shared
-COPY src src
-COPY tsconfig.json .
+COPY order-service/src src
+COPY order-service/tsconfig.json .
 
 RUN npm run build && npm prune --omit=dev
 

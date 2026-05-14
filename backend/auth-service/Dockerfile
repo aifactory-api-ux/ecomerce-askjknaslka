@@ -6,8 +6,8 @@ COPY package*.json ./
 RUN npm install
 
 COPY shared ./shared
-COPY src src
-COPY tsconfig.json .
+COPY auth-service/src src
+COPY auth-service/tsconfig.json .
 
 RUN npm run build && npm prune --omit=dev
 
