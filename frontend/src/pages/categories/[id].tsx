@@ -15,6 +15,9 @@ export default function CategoryPage({ category }: CategoryPageProps) {
 }
 
 export const getServerSideProps: GetServerSideProps<CategoryPageProps> = async ({ params }) => {
+  if (!params || !params.id) {
+    return { notFound: true };
+  }
   const { id } = params;
 
   try {
