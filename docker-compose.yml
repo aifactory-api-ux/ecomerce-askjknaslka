@@ -1,0 +1,169 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15.5
+    container_name: ecommerce-postgres
+    environment:
+      POSTGRES_USER: ecommerce
+      POSTGRES_PASSWORD: secretpassword
+      POSTGRES_DB: ecommerce
+    ports:
+      - "25432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ecommerce"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7.2.4
+    container_name: ecommerce-redis
+    ports:
+      - "26379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    container_name: ecommerce-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "25672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api-service:
+    build:
+      context: ./backend/api-service
+      dockerfile: Dockerfile
+    container_name: ecommerce-api-service
+    environment:
+      NODE_ENV: production
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ecommerce
+      POSTGRES_PASSWORD: secretpassword
+      POSTGRES_DB: ecommerce
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      PORT: 23001
+      JWT_SECRET: supersecretjwtkey
+      JWT_EXPIRES_IN: 3600
+      FRONTEND_URL: http://localhost:3000
+      API_URL: http://localhost:23001
+    ports:
+      - "23001:23001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+  auth-service:
+    build:
+      context: ./backend/auth-service
+      dockerfile: Dockerfile
+    container_name: ecommerce-auth-service
+    environment:
+      NODE_ENV: production
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ecommerce
+      POSTGRES_PASSWORD: secretpassword
+      POSTGRES_DB: ecommerce
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      PORT: 23002
+      JWT_SECRET: supersecretjwtkey
+      JWT_EXPIRES_IN: 3600
+      SESSION_SECRET: sessionsecret
+      FRONTEND_URL: http://localhost:3000
+      API_URL: http://localhost:23001
+    ports:
+      - "23002:23002"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+  order-service:
+    build:
+      context: ./backend/order-service
+      dockerfile: Dockerfile
+    container_name: ecommerce-order-service
+    environment:
+      NODE_ENV: production
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ecommerce
+      POSTGRES_PASSWORD: secretpassword
+      POSTGRES_DB: ecommerce
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      PORT: 23003
+      JWT_SECRET: supersecretjwtkey
+      JWT_EXPIRES_IN: 3600
+      FRONTEND_URL: http://localhost:3000
+      API_URL: http://localhost:23001
+    ports:
+      - "23003:23003"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+  nginx:
+    image: nginx:1.25
+    container_name: ecommerce-nginx
+    ports:
+      - "28080:80"
+      - "26443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api-service
+      - auth-service
+      - order-service
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ecommerce-frontend
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_URL: http://localhost:23001
+    ports:
+      - "23000:3000"
+    depends_on:
+      - api-service
+      - auth-service
+
+volumes:
+  postgres_data:

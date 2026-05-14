@@ -1,0 +1,239 @@
+openapi: 3.1.0
+info:
+  title: Derived API Contract
+  version: 1.0.0
+paths:
+  /api/auth/login:
+    post:
+      operationId: post_api_auth_login
+      responses:
+        '201':
+          description: Derived from SPEC.md
+          content:
+            application/json:
+              schema:
+                type: object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/auth/register:
+    post:
+      operationId: post_api_auth_register
+      responses:
+        '201':
+          description: Derived from SPEC.md
+          content:
+            application/json:
+              schema:
+                type: object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/cart:
+    get:
+      operationId: get_api_cart
+      responses:
+        '200':
+          description: Derived from SPEC.md
+          content:
+            application/json:
+              schema:
+                type: object
+  /api/cart/items:
+    post:
+      operationId: post_api_cart_items
+      responses:
+        '201':
+          description: Derived from SPEC.md
+          content:
+            application/json:
+              schema:
+                type: object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/cart/items/:productId:
+    delete:
+      operationId: delete_api_cart_items_productId
+      responses:
+        '204':
+          description: Derived from SPEC.md
+    put:
+      operationId: put_api_cart_items_productId
+      responses:
+        '200':
+          description: Derived from SPEC.md
+          content:
+            application/json:
+              schema:
+                type: object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/categories:
+    get:
+      operationId: get_api_categories
+      responses:
+        '200':
+          description: Derived from SPEC.md
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      operationId: post_api_categories
+      responses:
+        '201':
+          description: Derived from SPEC.md
+          content:
+            application/json:
+              schema:
+                type: object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/categories/:id:
+    delete:
+      operationId: delete_api_categories_id
+      responses:
+        '204':
+          description: Derived from SPEC.md
+    get:
+      operationId: get_api_categories_id
+      responses:
+        '200':
+          description: Derived from SPEC.md
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      operationId: put_api_categories_id
+      responses:
+        '200':
+          description: Derived from SPEC.md
+          content:
+            application/json:
+              schema:
+                type: object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/orders:
+    get:
+      operationId: get_api_orders
+      responses:
+        '200':
+          description: Derived from SPEC.md
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      operationId: post_api_orders
+      responses:
+        '201':
+          description: Derived from SPEC.md
+          content:
+            application/json:
+              schema:
+                type: object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/orders/:id:
+    get:
+      operationId: get_api_orders_id
+      responses:
+        '200':
+          description: Derived from SPEC.md
+          content:
+            application/json:
+              schema:
+                type: object
+  /api/products:
+    get:
+      operationId: get_api_products
+      responses:
+        '200':
+          description: Derived from SPEC.md
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      operationId: post_api_products
+      responses:
+        '201':
+          description: Derived from SPEC.md
+          content:
+            application/json:
+              schema:
+                type: object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/products/:id:
+    delete:
+      operationId: delete_api_products_id
+      responses:
+        '204':
+          description: Derived from SPEC.md
+    get:
+      operationId: get_api_products_id
+      responses:
+        '200':
+          description: Derived from SPEC.md
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      operationId: put_api_products_id
+      responses:
+        '200':
+          description: Derived from SPEC.md
+          content:
+            application/json:
+              schema:
+                type: object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /api/users/me:
+    get:
+      operationId: get_api_users_me
+      responses:
+        '200':
+          description: Derived from SPEC.md
+          content:
+            application/json:
+              schema:
+                type: object
