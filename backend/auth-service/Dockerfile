@@ -5,7 +5,9 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-COPY . .
+COPY shared ./shared
+COPY src src
+COPY tsconfig.json .
 
 RUN npm run build && npm prune --omit=dev
 
