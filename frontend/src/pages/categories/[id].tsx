@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import { Category } from '../types';
+import { Category } from '../../types';
 
 interface CategoryPageProps {
   category: Category;
