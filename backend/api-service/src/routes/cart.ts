@@ -1,8 +1,8 @@
 import { Router, Response } from 'express';
-import { Cart, CartItem } from '../../../shared/models';
-import { generateUUID } from '../../../shared/utils';
+import { Cart, CartItem } from '../../shared/models';
+import { generateUUID } from '../../shared/utils';
 import { ValidationError, NotFoundError } from '../middlewares/errorHandler';
-import { getDbConnection } from '../../../shared/db';
+import { getDbConnection } from '../../shared/db';
 import { authenticate, AuthRequest } from '../middlewares/auth';
 
 const router = Router();

@@ -1,7 +1,7 @@
-import { Order, OrderItem } from '../../../shared/models';
-import { generateUUID } from '../../../shared/utils';
+import { Order, OrderItem } from '../../shared/models';
+import { generateUUID } from '../../shared/utils';
 import { ValidationError, NotFoundError } from '../middlewares/errorHandler';
-import { getDbConnection } from '../../../shared/db';
+import { getDbConnection } from '../../shared/db';
 
 export async function createOrder(userId: string, items: { productId: string; quantity: number }[]): Promise<Order> {
   if (!items || items.length === 0) {

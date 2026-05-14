@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
-import { Category } from '../../../shared/models';
-import { generateUUID } from '../../../shared/utils';
+import { Category } from '../../shared/models';
+import { generateUUID } from '../../shared/utils';
 import { ValidationError } from '../middlewares/errorHandler';
-import { getDbConnection } from '../../../shared/db';
+import { getDbConnection } from '../../shared/db';
 
 const router = Router();
 
