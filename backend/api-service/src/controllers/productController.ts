@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { Product } from '../../../shared/models';
-import { generateUUID } from '../../../shared/utils';
+import { Product } from '../../shared/models';
+import { generateUUID } from '../../shared/utils';
 import { ValidationError, NotFoundError } from '../middlewares/errorHandler';
-import { getDbConnection } from '../../../shared/db';
+import { getDbConnection } from '../../shared/db';
 
 export async function getProducts(): Promise<Product[]> {
   const db = getDbConnection();

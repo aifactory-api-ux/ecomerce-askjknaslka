@@ -1,6 +1,6 @@
 import { Router, Response } from 'express';
 import { authenticate, AuthRequest } from '../middlewares/auth';
-import { getDbConnection } from '../../../shared/db';
+import { getDbConnection } from '../../shared/db';
 
 const router = Router();
 

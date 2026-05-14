@@ -1,7 +1,7 @@
-import { Cart, CartItem } from '../../../shared/models';
-import { generateUUID } from '../../../shared/utils';
+import { Cart, CartItem } from '../../shared/models';
+import { generateUUID } from '../../shared/utils';
 import { ValidationError, NotFoundError } from '../middlewares/errorHandler';
-import { getDbConnection } from '../../../shared/db';
+import { getDbConnection } from '../../shared/db';
 
 async function getOrCreateCart(userId: string): Promise<Cart> {
   const db = getDbConnection();

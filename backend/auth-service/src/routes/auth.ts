@@ -1,10 +1,10 @@
 import { Router, Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { User } from '../../../shared/models';
-import { generateUUID, hashPassword, comparePassword } from '../../../shared/utils';
+import { User } from '../../shared/models';
+import { generateUUID, hashPassword, comparePassword } from '../../shared/utils';
 import { ValidationError } from '../middlewares/errorHandler';
-import { getDbConnection } from '../../../shared/db';
+import { getDbConnection } from '../../shared/db';
 
 const router = Router();
 
